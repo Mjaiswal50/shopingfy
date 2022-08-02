@@ -1,0 +1,37 @@
+<div class="row d-flex justify-content-between">
+  <div class="col-3">
+    <img src="../../assets/logo.png" alt="Online Shop" />
+  </div>
+  <div class="col-3  ">
+    <form [formGroup]="this.searchForm" class="d-flex">
+      <input formControlName="Svalue" class="form-control m-2" type="text" id="header-search" placeholder="Search"
+        name="s" />
+      <button type="submit" (click)="searching()" class="btn btn-primary h-50 m-2">Search</button>
+    </form>
+
+  </div>
+</div>
+<div class="row p-2 bg-primary d-flex justify-content-start mb-5">
+  <div class="col-1 text-light font-weight-bold mx-3">
+    About Us
+  </div>
+  <div class="col-1 text-light font-weight-bold mx-2">
+    Contact Us
+  </div>
+  <div class="col-2 text-light font-weight-bold mx-3">
+    Product List
+  </div>
+</div>
+
+<div *ngIf="this.alertFVar" class="mx-auto alert alert-warning alert-dismissible fade show"
+  style="z-index:1;position: fixed;bottom:0;right:0;" role="alert">
+  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.alertMsg}} &nbsp;
+  <button class="close btn btn-outline-danger btn-sm" data-dismiss="alert">&nbsp;X&nbsp;
+  </button>
+</div>
+<div *ngIf="this.alertSVar" class="mx-auto alert alert-success alert-dismissible fade show"
+  style="z-index:1;position: fixed;bottom:0;right:0;" role="alert">
+  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.alertMsg}} &nbsp;
+  <button class="close btn btn-outline-success btn-sm" data-dismiss="alert">&nbsp;X&nbsp;
+  </button>
+</div>
