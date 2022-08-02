@@ -4,6 +4,7 @@ import { CartsService } from '../services/carts.service';
 import { ProductsService } from '../services/products.service';
 import { map, tap, take, switchMap, filter } from 'rxjs/operators';
 import { AlertingService } from '../services/alerting.service';
+import { PaginationService } from '../services/pagination.service';
 /* @ts-ignore */
 @Component({
   selector: 'app-product-list-page',
@@ -15,7 +16,10 @@ export class ProductListPageComponent implements OnInit, AfterViewInit {
   listVar: boolean = true;
   qValue: any = 1;
   // z=position: absolute; top: 0; right: 0;
-  constructor(private httpclient: HttpClient, private productsService: ProductsService, private cartsService: CartsService, private alertingService: AlertingService) {
+  paginations: any;
+  p: number = 1;
+
+  constructor(private httpclient: HttpClient, private productsService: ProductsService, private cartsService: CartsService, private alertingService: AlertingService, private service: PaginationService) {
   }
 
 
@@ -27,6 +31,11 @@ export class ProductListPageComponent implements OnInit, AfterViewInit {
     this.cartsService.fetchProductsFromCart().subscribe(res => {
       console.log("doubt1", res);
     })
+    this.service.getPost()
+      .subscribe((response: any) => {
+        this.paginations = response;
+        console.log(response);
+      });
   }
 
   ngAfterViewInit(): void {
@@ -69,6 +78,7 @@ export class ProductListPageComponent implements OnInit, AfterViewInit {
   filterbycategory() {
     console.log(1234, this.products)
   }
+
 
 
 }
