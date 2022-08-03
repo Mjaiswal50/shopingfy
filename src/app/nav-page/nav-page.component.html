@@ -1,26 +1,47 @@
-<div class="row d-flex justify-content-between">
-  <div class="col-3">
-    <img src="../../assets/logo.png" alt="Online Shop" />
+<div class="row justify-content-between">
+  <div class="col-lg-3 col-md-4 col-sm-6">
+    <img src="../../assets/logo.png" class="img-fluid" alt="Online Shop" />
   </div>
-  <div class="col-3  ">
-    <form [formGroup]="this.searchForm" class="d-flex">
-      <input formControlName="Svalue" class="form-control m-2" type="text" id="header-search" placeholder="Search"
-        name="s" />
-      <button type="submit" (click)="searching()" class="btn btn-primary h-50 m-2">Search</button>
+  <div class="col-lg-3 col-md-4 col-sm-6">
+    <form [formGroup]="this.searchForm" class="">
+      <div class="d-flex">
+            <input formControlName="Svalue" class="form-control m-2" type="text" id="header-search" placeholder="Search" name="s" />
+            <button type="submit" (click)="searching()" class=" btn btn-primary m-2">Search</button>
+      </div>
+ 
     </form>
-
   </div>
 </div>
-<div class="row p-2 bg-primary d-flex justify-content-start mb-5">
-  <div class="col-1 text-light font-weight-bold mx-3">
-    About Us
-  </div>
-  <div class="col-1 text-light font-weight-bold mx-2">
-    Contact Us
-  </div>
-  <div class="col-2 text-light font-weight-bold mx-3">
-    Product List
-  </div>
+<nav class="m-2 navbar navbar-expand-lg bg-primary  justify-content-start">
+   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class=" text-light font-weight-bold mx-3">
+            About Us
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class=" text-light font-weight-bold mx-3s">
+            Contact Us
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class=" text-light font-weight-bold mx-3">
+            Product List
+          </div>
+        </li>
+      </ul>
+    </div>
+
+</nav>
+<div class="row   mb-5">
+ 
+
 </div>
 
 <div *ngIf="this.alertFVar" class="mx-auto alert alert-warning alert-dismissible fade show"
