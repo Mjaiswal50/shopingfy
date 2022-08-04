@@ -1,12 +1,9 @@
 <app-nav-page></app-nav-page>
-<div class="row">
-  <div class="col-3">
-    <app-shop-by-category-page [showFormVar]="this.formShow"></app-shop-by-category-page>
-  </div>
-  <div class="col-6">
+<div class="row d-flex justify-content-around ">
+  <div class=" col-lg-9 ">
     <app-shopping-cart-items></app-shopping-cart-items>
   </div>
-  <div class="col-3 bg-accent">
+  <div class="col-lg-2 bg-accent">
     <app-your-cart-page></app-your-cart-page>
   </div>
 </div>

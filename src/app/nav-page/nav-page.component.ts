@@ -10,11 +10,10 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./nav-page.component.css']
 })
 export class NavPageComponent implements OnInit {
-  toastVar = false;
   searchForm: FormGroup;
-  alertSVar = false;
-  alertFVar = true;
-  alertMsg = "";
+  alertSuccess = false;
+  alertFailure = true;
+  lightMsg = "";
   strongMsg = "";
   constructor(private productsService: ProductsService, private alertingService: AlertingService) {
     this.searchForm = new FormGroup({
@@ -22,33 +21,26 @@ export class NavPageComponent implements OnInit {
     })
   }
   searching() {
-    var Sfvalue = this.searchForm.value;
-    console.log(Sfvalue);
     this.productsService.categoryArray.pipe(take(1)).subscribe(res => {
-      let bool = res.includes(Sfvalue.Svalue);
-      console.log(bool);
+      let bool = res.includes(this.searchForm.value.Svalue);
       if (!bool) {
         this.alertingService.error("Opps !", " No Item Found - Try Again", 2)
       }
     })
-    this.productsService.filterCategory(Sfvalue.Svalue);
+    this.productsService.filterCategory(this.searchForm.value.Svalue);
   }
   ngOnInit(): void {
     this.alertingService.tempSToastVar.subscribe(res => {
-      console.log(res);
-      this.alertSVar = res;
+      this.alertSuccess = res;
     });
     this.alertingService.tempMsgVar.subscribe(res => {
-      console.log(res);
-      this.alertMsg = res;
+      this.lightMsg = res;
     });
     this.alertingService.tempSmsgVar.subscribe(res => {
-      console.log(res);
       this.strongMsg = res;
     });
     this.alertingService.tempFToastVar.subscribe(res => {
-      console.log(res);
-      this.alertFVar = res;
+      this.alertFailure = res;
     });
   }
 

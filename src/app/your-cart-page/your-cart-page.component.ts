@@ -15,7 +15,7 @@ Cno:any;
 Cvalue:any;
   constructor(private cartsService:CartsService) { }
   ngDoCheck(): void {
-    this.disableVarCheckout = !this.cartsService.DisableBtn.value;
+    this.disableVarCheckout = !this.cartsService.disableViewCartBtn.value;
     if (!this.disableVarCheckout) {
       //@ts-ignore
       document.getElementById("vcc").style['pointer-events'] = 'auto';

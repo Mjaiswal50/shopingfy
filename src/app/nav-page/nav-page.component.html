@@ -12,21 +12,21 @@
     </form>
   </div>
 </div>
-<nav class="m-2 navbar navbar-expand-lg bg-primary  justify-content-start">
+<nav class="navbar navbar-expand-lg bg-primary  justify-content-start">
    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <div class=" text-light font-weight-bold mx-3">
             About Us
           </div>
         </li>
         <li class="nav-item">
-          <div class=" text-light font-weight-bold mx-3s">
+          <div class=" text-light font-weight-bold mx-3">
             Contact Us
           </div>
         </li>
@@ -44,15 +44,15 @@
 
 </div>
 
-<div *ngIf="this.alertFVar" class="mx-auto alert alert-warning alert-dismissible fade show"
+<div *ngIf="this.alertFailure" class="mx-auto alert alert-warning alert-dismissible fade show"
   style="z-index:1;position: fixed;bottom:0;right:0;" role="alert">
-  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.alertMsg}} &nbsp;
+  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.lightMsg}} &nbsp;
   <button class="close btn btn-outline-danger btn-sm" data-dismiss="alert">&nbsp;X&nbsp;
   </button>
 </div>
-<div *ngIf="this.alertSVar" class="mx-auto alert alert-success alert-dismissible fade show"
+<div *ngIf="this.alertSuccess" class="mx-auto alert alert-success alert-dismissible fade show"
   style="z-index:1;position: fixed;bottom:0;right:0;" role="alert">
-  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.alertMsg}} &nbsp;
+  <strong> {{this.strongMsg}} &nbsp;</strong>{{this.lightMsg}} &nbsp;
   <button class="close btn btn-outline-success btn-sm" data-dismiss="alert">&nbsp;X&nbsp;
   </button>
 </div>

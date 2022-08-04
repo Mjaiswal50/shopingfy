@@ -25,7 +25,6 @@ export class ShopByCategoryPageComponent implements OnInit {
             if (!!this.productSubmitForm.value.price) {
               if (!!this.productSubmitForm.value.category) {
                 this.productsService.addProduct(this.productSubmitForm.value).subscribe((res) => {
-                  console.log(res, "callapi");
                   this.productSubmitForm.patchValue({
                     image: "",
                     title: "",
@@ -65,7 +64,6 @@ export class ShopByCategoryPageComponent implements OnInit {
 
 
 
-    console.log("productFormValue()", this.productSubmitForm.value);
   }
   ngOnInit(): void {
     this.productSubmitForm = new FormGroup({
@@ -78,7 +76,6 @@ export class ShopByCategoryPageComponent implements OnInit {
     this.productsService.categoryArray.subscribe(res => {
       this.categories = res;
     });
-    console.log("xmx", this.categories);
   }
   callProductFilter(catNamez: any) {
     if (this.oldCategory !== catNamez) {

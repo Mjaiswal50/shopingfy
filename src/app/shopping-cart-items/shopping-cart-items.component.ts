@@ -16,7 +16,6 @@ export class ShoppingCartItemsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.cartsService.cartProducts.subscribe(res => {
-      console.log("done", res)
       this.cartItems = res;
       this.totalCheckoutPrice = 0;
       for (let p of res) {
@@ -34,24 +33,22 @@ export class ShoppingCartItemsComponent implements OnInit, AfterViewInit {
     }
   }
   ngAfterViewInit() {
-    this.cartsService.fetchProductsFromCart().subscribe(res => {
-      console.log("donefetchingcartsi", res);
+    this.cartsService.fetchCartProducts().subscribe(res => {
     });
   }
   inc(item: any) {
     this.cartsService.incrCartItem(item).subscribe(res => {
-      this.cartsService.fetchProductsFromCart().subscribe();
+      this.cartsService.fetchCartProducts().subscribe();
     })
   }
   dec(item: any) {
     this.cartsService.decrCartItem(item).subscribe(res => {
-      this.cartsService.fetchProductsFromCart().subscribe();
+      this.cartsService.fetchCartProducts().subscribe();
     })
   }
   deleteItem(uid: any) {
     this.cartsService.deleteProductFromCart(uid).subscribe(res => {
       this.alertingService.success("HEY !", "Your item deleted successfully", 4);
-      console.log("firsttsdelete")
     }
     )
 

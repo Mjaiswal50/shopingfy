@@ -4,7 +4,6 @@ import { CartsService } from '../services/carts.service';
 import { ProductsService } from '../services/products.service';
 import { map, tap, take, switchMap, filter } from 'rxjs/operators';
 import { AlertingService } from '../services/alerting.service';
-import { PaginationService } from '../services/pagination.service';
 /* @ts-ignore */
 @Component({
   selector: 'app-product-list-page',
@@ -14,33 +13,24 @@ import { PaginationService } from '../services/pagination.service';
 export class ProductListPageComponent implements OnInit, AfterViewInit {
   products: any = [];
   listVar: boolean = true;
-  qValue: any = 1;
-  // z=position: absolute; top: 0; right: 0;
+  quantityVar: any = 1;
   paginations: any;
   p: number = 1;
 
-  constructor(private httpclient: HttpClient, private productsService: ProductsService, private cartsService: CartsService, private alertingService: AlertingService, private service: PaginationService) {
+  constructor(private httpclient: HttpClient, private productsService: ProductsService, private cartsService: CartsService, private alertingService: AlertingService) {
   }
 
 
   ngOnInit(): void {
     this.productsService.products.subscribe((res: any) => {
-      console.log("oninit", (res));
       this.products = res;
     });
-    this.cartsService.fetchProductsFromCart().subscribe(res => {
-      console.log("doubt1", res);
-    })
-    this.service.getPost()
-      .subscribe((response: any) => {
-        this.paginations = response;
-        console.log(response);
-      });
+    this.cartsService.fetchCartProducts().subscribe(res => {
+    });
   }
 
   ngAfterViewInit(): void {
-    console.log("after");
-    this.productsService.fetchProducts().subscribe(() => {
+    this.productsService.fetchAllProducts().subscribe(() => {
     }
     )
 
@@ -48,22 +38,19 @@ export class ProductListPageComponent implements OnInit, AfterViewInit {
 
 
   addToCart(product: any, quantity: any) {
-    this.cartsService.DisableBtn.next(false);
+    this.cartsService.disableViewCartBtn.next(false);
     this.alertingService.success("Done ('.')", "Product Successfully Added To Cart", 2);
     setTimeout(() => {
-      this.cartsService.DisableBtn.next(true)
+      this.cartsService.disableViewCartBtn.next(true)
     }, 2000);
-    console.log("qvalue", this.qValue)
     /* @ts-ignore */
-    this.cartsService.fetchProductsFromCart().subscribe((res: any) => {
+    this.cartsService.fetchCartProducts().subscribe((res: any) => {
       /* @ts-ignore */
       this.cartsService.addToCart(product, quantity).subscribe((cart: any) => {
-        console.log("Added Product Encrypt Name", cart.name);
-
       }
       )
     });
-    this.qValue = 1;
+    this.quantityVar = 1;
   }
 
   listViewSet(e: Event) {
@@ -75,9 +62,7 @@ export class ProductListPageComponent implements OnInit, AfterViewInit {
     this.listVar = false;
   }
 
-  filterbycategory() {
-    console.log(1234, this.products)
-  }
+
 
 
 

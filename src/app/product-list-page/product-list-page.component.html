@@ -1,158 +1,86 @@
-<div class="container mb-3 mt-3">
-  <button class="btn btn-primary " (click)="listViewSet($event)">
-    Grid View
-  </button>
-  &nbsp;
-  <button class="btn btn-primary" (click)="gridViewSet($event)">
-    List View
-  </button>
+<div class="container mb-4 mt-1 d-flex justify-content-between">
+  <div style="font-size: 27px; font-weight: bold;" class="text-primary">
+    Products</div>
+  <div>
+    <button class="btn btn-grid " style="border: none;" (click)="gridViewSet($event)">
+     <span class="material-icons text-primary">grid_list</span>
+    </button>
+    
+    <button class="btn btn-list" style="border: none;"  (click)="listViewSet($event)">
+      <span class="material-icons text-primary">view_list</span>
+    </button>
+  </div>
 </div>
-<div class="">
-      <div *ngIf="listVar" class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col" *ngFor="let product of products | paginate: {itemsPerPage: 3, currentPage: p}">
-          <div class="card">
-            <img class="img-fluid p-5 pb-1 pt-1 " src="{{ product.image }}" style="height: 16.5rem!important"
-              alt="Card image cap" />
-            <div class="card-body">
-              <h5 class="card-title text-truncate">{{ product.title }}</h5>
-              <p class="card-text ">{{ product.description | strTruncate}}</p>
-              <p class="card-text text-truncate">Price-${{ product.price }}</p>
-              <button class="btn btn-primary" data-toggle="modal" type="button" [attr.data-target]="'#'+product.id">View
-                Details</button>
-              <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">
-                        {{ product.title}}
-                      </h5>
-                      <div type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </div>
-                    </div>
-                    <div class="modal-body">
-                      <div class="row">
-                        <div class="col-6">
-                          <img src="{{ product.image }}" class="img-fluid" style="height:12rem" alt="" />
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <div class="row">Color</div>
-                            <div class="row">
-                              <select class="form-select w-50" aria-label="Default select example">
-                                <option selected value="Red">Red</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Green">Green</option>
-                              </select>
-                            </div>
-                          </div>
-                          <br />
-                          <div class="row">
-                            <div class="row">Qty</div>
-                            <div class="row">
-                              <input type="number" min="1" [(ngModel)]="qValue" class="w-50" />
-                            </div>
-                          </div>
-                          <br />
-                          <div class="row">
-                            <div class="row" style="font-weight: bold">Price</div>
-                            <div class="row" style="font-weight: bold">
-                              ${{ product.price }}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        {{ product.description }}
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary" (click)="addToCart(product,this.qValue)"
-                        data-dismiss="modal">
-                        Add to Cart
-                      </button>
+<div>
+  <div *ngIf="listVar" class="row">
+    <div class="card mb-3" *ngFor="let product of products | paginate: {itemsPerPage: 3, currentPage: p}">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ product.image }}" class="img-fluid rounded-start" style="height: 15rem" alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title text-truncate">{{ product.title }}</h5>
+            <p class="card-text">{{ product.description | strTruncate}}</p>
+            <p class="card-text">Price-${{ product.price }}</p>
+            <button class="btn btn-primary" data-toggle="modal" type="button" [attr.data-target]="'#'+product.id">View
+              Details</button>
+            <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      {{ product.title }}
+                    </h5>
+                    <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="!listVar" class="row">
-        <div class="card mb-3" *ngFor="let product of products | paginate: {itemsPerPage: 3, currentPage: p}">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="{{ product.image }}" class="img-fluid rounded-start" style="height: 15rem" alt="..." />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title text-truncate">{{ product.title }}</h5>
-                <p class="card-text">{{ product.description | strTruncate}}</p>
-                <p class="card-text">Price-${{ product.price }}</p>
-                <button class="btn btn-primary" data-toggle="modal" type="button" [attr.data-target]="'#'+product.id">View
-                  Details</button>
-                <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                          {{ product.title }}
-                        </h5>
-                        <div type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <img src="{{ product.image }}" class="img-fluid" alt="" />
                       </div>
-                      <div class="modal-body">
+                      <div class="col-6">
                         <div class="row">
-                          <div class="col-6">
-                            <img src="{{ product.image }}" class="img-fluid" alt="" />
-                          </div>
-                          <div class="col-6">
-                            <div class="row">
-                              <div class="row">Color</div>
-                              <div class="row">
-                                <select class="form-select w-50" aria-label="Default select example">
-                                  <option selected value="Red">Red</option>
-                                  <option value="Blue">Blue</option>
-                                  <option value="Green">Green</option>
-                                </select>
-                              </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                              <div class="row">Qty</div>
-                              <div class="row">
-                                <input type="text" class="w-50" />
-                              </div>
-                            </div>
-                            <br />
-                            <div class="row">
-                              <div class="row" style="font-weight: bold">Price</div>
-                              <div class="row" style="font-weight: bold">
-                                ${{ product.price }}
-                              </div>
-                            </div>
+                          <div class="row">Color</div>
+                          <div class="row">
+                            <select class="form-select w-50" aria-label="Default select example">
+                              <option selected value="Red">Red</option>
+                              <option value="Blue">Blue</option>
+                              <option value="Green">Green</option>
+                            </select>
                           </div>
                         </div>
+                        <br />
                         <div class="row">
-                          {{ product.description }}
+                          <div class="row">Qty</div>
+                          <div class="row">
+                            <input type="number" min="1" [(ngModel)]="quantityVar" class="w-50" />
+                          </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                          <div class="row" style="font-weight: bold">Price</div>
+                          <div class="row" style="font-weight: bold">
+                            ${{ product.price }}
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
+                      {{ product.description }}
+                    </div>
+                  </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">
                       Close
                     </button>
-                    <button type="button" class="btn btn-primary" (click)="addToCart(product,this.qValue)" data-dismiss="modal">
+                    <button type="button" class="btn btn-primary" (click)="addToCart(product,this.quantityVar)"
+                      data-dismiss="modal">
                       Add to Cart
                     </button>
-                  </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -160,10 +88,84 @@
           </div>
         </div>
       </div>
-    <div class="p-2 m-2">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
-  
-
-
+  </div>
+  <div *ngIf="!listVar" class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col" *ngFor="let product of products | paginate: {itemsPerPage: 3, currentPage: p}">
+      <div class="card">
+        <img class="img-fluid p-5 pb-1 pt-1 " src="{{ product.image }}" style="height: 16.5rem!important"
+          alt="Card image cap" />
+        <div class="card-body">
+          <h5 class="card-title text-truncate">{{ product.title }}</h5>
+          <p class="card-text ">{{ product.description | strTruncate}}</p>
+          <p class="card-text text-truncate">Price-${{ product.price }}</p>
+          <button class="btn btn-primary" data-toggle="modal" type="button" [attr.data-target]="'#'+product.id">View
+            Details</button>
+          <div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    {{ product.title}}
+                  </h5>
+                  <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </div>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <img src="{{ product.image }}" class="img-fluid" style="height:12rem" alt="" />
+                    </div>
+                    <div class="col-6">
+                      <div class="row">
+                        <div class="row">Color</div>
+                        <div class="row">
+                          <select class="form-select w-50" aria-label="Default select example">
+                            <option selected value="Red">Red</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Green">Green</option>
+                          </select>
+                        </div>
+                      </div>
+                      <br />
+                      <div class="row">
+                        <div class="row">Qty</div>
+                        <div class="row">
+                          <input type="number" min="1" [(ngModel)]="quantityVar" class="w-50" />
+                        </div>
+                      </div>
+                      <br />
+                      <div class="row">
+                        <div class="row" style="font-weight: bold">Price</div>
+                        <div class="row" style="font-weight: bold">
+                          ${{ product.price }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    {{ product.description }}
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary" (click)="addToCart(product,this.quantityVar)"
+                    data-dismiss="modal">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 m-2">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </div>
