@@ -19,7 +19,7 @@ export class ShopByCategoryPageComponent implements OnInit {
 
     if (!!this.productSubmitForm.value.image) {
       let arr = this.productSubmitForm.value.image.split(".");
-      if (arr[1] == "jpeg") {
+      if (arr[1] == "jpg" || "jpeg" || "png") {
         if (!!this.productSubmitForm.value.title) {
           if (!!this.productSubmitForm.value.description) {
             if (!!this.productSubmitForm.value.price) {

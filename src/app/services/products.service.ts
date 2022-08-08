@@ -47,14 +47,16 @@ export class ProductsService {
   }
   addProduct(productDetail: any) {
     return this.httpclient.post<any>('https://onlineshoppingapi-default-rtdb.firebaseio.com/allproducts.json',
-      { ...productDetail }
-    ).pipe(take(1), tap((Newproduct: any) => {
+      productDetail 
+    ).pipe( tap((Newproduct: any) => {
       let newId = this._products.value.length + productDetail.category;
       let newProducts = { ...productDetail };
+      // ADD UID AND UPDATE ADDED PRODUCT
       this.httpclient.put<any>('https://onlineshoppingapi-default-rtdb.firebaseio.com/allproducts/' + Newproduct.name + '.json', { ...newProducts, uid: Newproduct.name, id: newId }
       ).subscribe((res) => {
-        this.fetchAllProducts().subscribe(newProducts => {
-          // return this._products.next(newProducts);
+        // UPDATE LATEST PRODUCT IN MAIN ARRAY
+        this.fetchAllProducts().subscribe(() => {
+        
         })
       })
 
